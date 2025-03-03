@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Donation Goal and Raised Amount</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #widget-container {
+            text-align: center;
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        #input-container {
+            margin: 20px 0;
+        }
+
+        #input-container input {
+            padding: 10px;
+            width: 80px;
+            margin-right: 5px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+        }
+
+        #input-container button {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #input-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div id="widget-container">
+        <h2>Set Goal and Raised Amount</h2>
+        <div id="input-container">
+            <input type="number" id="goal-input" placeholder="Goal" min="0">
+            <input type="number" id="raised-input" placeholder="Raised" min="0">
+            <button id="confirm-button">Confirm</button>
+        </div>
+    </div>
+    <script>
+        document.getElementById("confirm-button").addEventListener("click", function() {
+            const goalInput = document.getElementById("goal-input");
+            const raisedInput = document.getElementById("raised-input");
+
+            const newGoalAmount = parseFloat(goalInput.value);
+            const newRaisedAmount = parseFloat(raisedInput.value);
+
+            if (!isNaN(newGoalAmount) && newGoalAmount > 0) {
+                localStorage.setItem("goalAmount", newGoalAmount);
+                alert("Donation goal set to $" + newGoalAmount);
+            }
+
+            if (!isNaN(newRaisedAmount) && newRaisedAmount >= 0) {
+                localStorage.setItem("raisedAmount", newRaisedAmount);
+                alert("Raised amount set to $" + newRaisedAmount);
+            }
+
+            goalInput.value = "";  // Clear the goal input field
+            raisedInput.value = "";  // Clear the raised input field
+        });
+    </script>
+</body>
+</html>

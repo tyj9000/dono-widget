@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Goal Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #widget-container {
+            text-align: center;
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        #progress-bar-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin: 20px 0;
+            height: 30px;
+            overflow: hidden;
+        }
+
+        #progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: #4caf50;
+            border-radius: 10px;
+            transition: width 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div id="widget-container">
+        <h2>Donation Goal: $<span id="goal-amount">1000</span></h2>
+        <div id="progress-bar-container">
+            <div id="progress-bar"></div>
+        </div>
+        <p>Raised: $<span id="raised-amount">0</span></p>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let goalAmount = parseFloat(localStorage.getItem("goalAmount")) || 1000;  // Retrieve goal amount from localStorage
+            let raisedAmount = parseFloat(localStorage.getItem("raisedAmount")) || 0;  // Retrieve raised amount from localStorage
+
+            // Function to update the progress bar
+            function updateProgressBar() {
+                const progressBar = document.getElementById("progress-bar");
+                const progressPercentage = (raisedAmount / goalAmount) * 100;
+                progressBar.style.width = progressPercentage + "%";
+                document.getElementById("goal-amount").textContent = goalAmount;
+                document.getElementById("raised-amount").textContent = raisedAmount;
+            }
+
+            updateProgressBar();  // Initial update
+        });
+    </script>
+</body>
+</html>
